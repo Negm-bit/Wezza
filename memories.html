@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title id="pageTitle">ذكرياتنا ♥</title><link rel="stylesheet" href="style.css"></head>
+<body class="memories-page">
+<div class="page-frame">
+<header class="fig-header">
+  <a class="fig-brand" href="index.html#top"><span id="brandName">زينبو</span><i class="heart-fill">♥</i></a>
+  <nav class="fig-nav"><a href="index.html#top">الرئيسية</a><a class="active" href="memories.html">الذكريات</a><a class="outline-link" href="index.html#message">رسالة ليكي</a></nav>
+</header>
+<main>
+<section class="memories-hero">
+  <div class="sparkle">✦</div>
+  <h1 id="memoriesIntro"></h1>
+  <p id="memoriesIntroDescription"></p>
+</section>
+
+<div class="memory-tabs" role="tablist">
+  <button class="active" data-tab="photos" role="tab"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="8" cy="9" r="1.5"/><path d="m5 17 4-4 3 3 2-2 5 4"/></svg><span id="tabPhotos"></span> <b>9</b></button>
+  <button data-tab="videos" role="tab"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="3"/><path d="m16 10 5-3v10l-5-3"/></svg><span id="tabVideos"></span> <b>21</b></button>
+  <button data-tab="chats" role="tab"><svg viewBox="0 0 24 24"><path d="M20 11a7 7 0 0 1-7 7H8l-4 3v-5a7 7 0 1 1 16-5Z"/></svg><span id="tabChats"></span> <b>12</b></button>
+</div>
+
+<section class="memory-panel active" id="photos"><div class="memory-grid" id="photoGrid"></div></section>
+<section class="memory-panel" id="videos"><div class="memory-grid" id="videoGrid"></div></section>
+<section class="memory-panel" id="chats"><div class="memory-grid" id="chatGrid"></div></section>
+
+<section class="memories-end">
+  <div class="sparkle">✦</div><h2 id="memoriesEndTitle"></h2><p id="memoriesEndDescription"></p>
+</section>
+</main>
+<footer class="fig-footer"><a href="index.html#top" class="fig-brand footer-brand"><span id="footerName">زينبو</span><i>♥</i></a><span id="footerText"></span><a href="index.html#top" class="footer-memories"><span id="footerHome"></span> <span>←</span></a></footer>
+</div>
+
+<div class="viewer" id="viewer" aria-hidden="true">
+  <div class="viewer-card">
+    <button class="viewer-close" id="closeViewer" aria-label="إغلاق">×</button>
+    <div class="viewer-index" id="viewerIndex"></div>
+    <h2 id="viewerTitle"></h2>
+    <div id="viewerBody"></div>
+    <p id="viewerCaption" class="viewer-caption"></p>
+  </div>
+</div>
+<script src="content.js"></script>
+<script src="auth.js"></script>
+<script>
+const D=window.SITE_DATA,$=s=>document.querySelector(s); const T=D.text;
+document.title=D.name+' ♥';
+const setText=(id,v)=>{const el=document.getElementById(id); if(el) el.textContent=v;};
+setText('pageTitle',D.name+' ♥'); setText('memoriesIntro',T.memoriesIntro); setText('memoriesIntroDescription',T.memoriesIntroDescription);
+setText('tabPhotos',T.tabs.photos); setText('tabVideos',T.tabs.videos); setText('tabChats',T.tabs.chats);
+setText('memoriesEndTitle',T.memoriesEndTitle); setText('memoriesEndDescription',T.memoriesEndDescription); setText('footerText',T.footer); setText('footerHome',T.footerHome);
+$('#brandName').textContent=D.name;$('#footerName').textContent=D.name;
+const viewer=$('#viewer'),body=$('#viewerBody'),title=$('#viewerTitle'),caption=$('#viewerCaption'),vindex=$('#viewerIndex');
+function openViewer(type,i,item){
+  viewer.classList.add('open');viewer.setAttribute('aria-hidden','false');title.textContent=T.viewerTitles[type];vindex.textContent=String(i+1).padStart(2,'0');caption.textContent=item.caption;
+  if(type==='video') body.innerHTML=`<div class="video-empty"><span class="big-play">▶</span><strong>مكان الفيديو جاهز</strong><small>ضع الملف: videos/${item.file}</small><video class="viewer-video" controls playsinline preload="metadata" src="videos/${item.file}"></video></div>`;
+  else body.innerHTML=`<img class="viewer-media" src="${type==='photo'?'media/photos/':'media/chats/'}${item.file}" alt="${item.caption}">`;
+}
+function closeViewer(){viewer.classList.remove('open');viewer.setAttribute('aria-hidden','true');body.innerHTML=''}
+$('#closeViewer').onclick=closeViewer;viewer.onclick=e=>{if(e.target===viewer)closeViewer()};document.addEventListener('keydown',e=>{if(e.key==='Escape')closeViewer()});
+function card(type,item,i){const b=document.createElement('button');b.className='memory-card '+type+'-card';const src=type==='photo'?'media/photos/'+item.file:type==='chat'?'media/chats/'+item.file:'videos/'+item.file;
+  if(type==='video') b.innerHTML=`<div class="media-box video-placeholder"><video muted preload="metadata" src="${src}"></video><span class="play-ring">▶</span><em>${String(i+1).padStart(2,'0')}</em></div><div class="card-meta"><strong>${item.caption}</strong><small>${T.viewerTypes.video}</small></div>`;
+  else b.innerHTML=`<div class="media-box"><img src="${src}" alt="${item.caption}"><em>${String(i+1).padStart(2,'0')}</em><span class="type-chip">${type==='photo'?'▧ صورة':'◌ شات'}</span></div><div class="card-meta"><strong>${item.caption}</strong><small>${T.viewerTypes[type]}</small></div>`;
+  b.onclick=()=>openViewer(type,i,item);return b;
+}
+D.photos.forEach((x,i)=>$('#photoGrid').appendChild(card('photo',x,i)));D.videos.forEach((x,i)=>$('#videoGrid').appendChild(card('video',x,i)));D.chats.forEach((x,i)=>$('#chatGrid').appendChild(card('chat',x,i)));
+document.querySelectorAll('.memory-tabs button').forEach(btn=>btn.onclick=()=>{document.querySelectorAll('.memory-tabs button').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.memory-panel').forEach(p=>p.classList.remove('active'));btn.classList.add('active');$('#'+btn.dataset.tab).classList.add('active');history.replaceState(null,'','#'+btn.dataset.tab)});
+const hash=location.hash.slice(1);if(['photos','videos','chats'].includes(hash))document.querySelector(`[data-tab="${hash}"]`).click();
+</script>
+</body></html>

@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title id="pageTitle">زينبو ♥</title><link rel="stylesheet" href="style.css">
+</head>
+<body class="home-page">
+<div class="page-frame" id="top">
+<header class="fig-header">
+  <a class="fig-brand" href="#top" aria-label="الرئيسية"><span id="brandName">زينبو</span><i class="heart-fill">♥</i></a>
+  <nav class="fig-nav" aria-label="التنقل">
+    <a class="active" href="#top">الرئيسية</a>
+    <a href="memories.html">الذكريات</a>
+    <a class="outline-link" href="#message">رسالة ليكي</a>
+  </nav>
+</header>
+
+<main>
+<section class="fig-hero">
+  <div class="hero-copy">
+    <div class="hero-badge"><span>✦</span> <span id="heroBadge"></span></div>
+    <h1 id="heroName">زينبو</h1>
+    <p><span id="heroDescription"></span></p>
+    <div class="counter-label"><span id="counterLabel"></span></div>
+    <div class="fig-counter" aria-label="عداد العلاقة منذ 20 يونيو 2025">
+      <div><strong id="minutes">00</strong><span>دقيقة</span></div>
+      <div><strong id="hours">00</strong><span>ساعة</span></div>
+      <div><strong id="days">00</strong><span>يوم</span></div>
+      <div><strong id="months">00</strong><span>شهر</span></div>
+      <div><strong id="years">00</strong><span>سنة</span></div>
+    </div>
+    <div class="forever"><span id="foreverText"></span></div>
+  </div>
+  <div class="hero-photo-wrap">
+    <div class="hero-photo-card">
+      <img id="profileImage" src="assets/profile-default.jpg" alt="صورة البروفايل">
+      <span class="photo-note"><b></b> <span id="profileNoteText"></span></span>
+    </div>
+  </div>
+</section>
+
+<section class="home-memories fig-section" id="memoriesPreview">
+  <div class="section-title-row">
+    <div><small><small id="memoriesEyebrow"></small><h2 id="memoriesTitle"></h2><p id="memoriesDescription"></p></div>
+    <a class="pill-arrow" href="memories.html#photos"><span id="memoriesButton"></span> <span>←</span></a>
+  </div>
+  <div class="memory-strip" id="homePreview"></div>
+</section>
+
+<section class="songs-section fig-section" id="songs">
+  <div class="section-title-row center-title"><div><small><small id="songsEyebrow"></small><h2 id="songsTitle"></h2></div></div>
+  <div class="song-shell">
+    <div class="song-cover"><img id="songCover" src="assets/album-1.jpg" alt="غلاف الأغنية"><span id="songIndex">01 / 14</span></div>
+    <div class="song-main">
+      <div class="song-kicker"><span id="songKicker"></span> <b id="songIndexText">01</b></div>
+      <h3 id="songTitle">حكاية حبنا</h3>
+      <audio id="audio" controls preload="metadata"></audio>
+      <div class="song-actions">
+        <button class="icon-btn" id="prevSong" aria-label="الأغنية السابقة">→</button>
+        <button class="main-play" id="songPlay" aria-label="تشغيل">▶</button>
+        <button class="icon-btn" id="nextSong" aria-label="الأغنية التالية">←</button>
+      </div>
+    </div>
+    <button class="song-switch" id="toggleSong"><span id="songSwitch"></span> <span>↻</span></button>
+  </div>
+</section>
+
+<section class="message-section" id="message">
+  <div class="message-glow"></div>
+  <div class="message-inner">
+    <div class="message-heart">♡</div>
+    <h2 id="messageTitle"></h2>
+    <p id="messageP1"></p>
+    <p id="messageP2"></p>
+    <p id="messageP3"></p>
+    <div class="message-sign"><span id="messageSign"></span><small id="messageSignSmall"></small></div>
+  </div>
+</section>
+</main>
+
+<footer class="fig-footer">
+  <a href="#top" class="fig-brand footer-brand"><span id="footerName">زينبو</span><i>♥</i></a>
+  <span id="footerText"></span>
+  <a href="memories.html" class="footer-memories"><span id="footerMemories"></span> <span>←</span></a>
+</footer>
+</div>
+
+<div class="birthday-celebration" id="birthdayCelebration" aria-hidden="true">
+  <div class="birthday-sky"></div>
+  <div class="balloons-layer" id="balloonsLayer"></div>
+  <div class="confetti-layer" id="confettiLayer"></div>
+  <div class="fireworks-layer" id="fireworksLayer"></div>
+  <div class="birthday-message" id="birthdayMessage">
+    <div class="tiny">✦ ♥ ✦</div>
+    <h2>كل سنه وانتي طيبه ي زوزووو</h2>
+    <p>🎈 بحبك 🎈</p>
+    <div class="heart-line">♥ ♥ ♥</div>
+  </div>
+</div>
+
+<div class="welcome-overlay" id="welcome">
+  <div class="welcome-card">
+    <button class="welcome-close" id="welcomeClose" aria-label="إغلاق">×</button>
+    <div class="welcome-star">✦</div>
+    <h2><span id="welcomeText"></span></h2>
+    <small><span id="welcomeCredit"></span></small>
+    <button class="welcome-enter" id="enterBtn"><span id="welcomeButton"></span> <span>←</span></button>
+  </div>
+</div>
+<script src="content.js"></script>
+<script src="auth.js"></script>
+<script>
+const D = window.SITE_DATA;
+const T = D.text;
+const setText=(id,v)=>{const el=document.getElementById(id); if(el) el.textContent=v;};
+document.title=D.name+' ♥';
+setText('pageTitle',D.name+' ♥'); setText('heroBadge',T.heroBadge); setText('heroDescription',T.heroDescription);
+setText('counterLabel',T.counterLabel); setText('foreverText',T.forever); setText('profileNoteText',T.profileNote);
+setText('memoriesEyebrow',T.memoriesEyebrow); setText('memoriesTitle',T.memoriesTitle); setText('memoriesDescription',T.memoriesDescription); setText('memoriesButton',T.memoriesButton);
+setText('songsEyebrow',T.songsEyebrow); setText('songsTitle',T.songsTitle); setText('songKicker',T.songKicker); setText('songSwitch',T.songSwitch);
+setText('messageTitle',T.messageTitle); setText('messageP1',T.messageParagraphs[0]); setText('messageP2',T.messageParagraphs[1]); setText('messageP3',T.messageParagraphs[2]); setText('messageSign',T.messageSign); setText('messageSignSmall',T.messageSignSmall);
+setText('footerText',T.footer); setText('footerMemories',T.footerMemories); setText('welcomeText',T.welcome); setText('welcomeCredit',T.welcomeCredit); setText('welcomeButton',T.welcomeButton);
+const $ = s => document.querySelector(s);
+$('#brandName').textContent=D.name; $('#heroName').textContent=D.name; $('#footerName').textContent=D.name; $('#profileImage').src=D.profile;
+
+function pad(n){return String(n).padStart(2,'0')}
+function calendarDiff(from,to){
+  let years=to.getFullYear()-from.getFullYear();
+  let anchor=new Date(from); anchor.setFullYear(from.getFullYear()+years);
+  if(anchor>to){years--;anchor.setFullYear(from.getFullYear()+years)}
+  let months=to.getMonth()-anchor.getMonth();
+  if(to.getDate()<anchor.getDate()) months--;
+  if(months<0) months+=12;
+  const monthAnchor=new Date(anchor); monthAnchor.setMonth(anchor.getMonth()+months);
+  let rest=to-monthAnchor;
+  const day=86400000,hour=3600000,minute=60000;
+  const days=Math.floor(rest/day); rest%=day;
+  const hours=Math.floor(rest/hour); rest%=hour;
+  const minutes=Math.floor(rest/minute);
+  return {years,months,days,hours,minutes};
+}
+function tick(){const d=calendarDiff(new Date(D.startDate),new Date());Object.entries(d).forEach(([k,v])=>$('#'+k).textContent=pad(v));}
+tick();setInterval(tick,1000);
+
+const preview=$('#homePreview');
+D.photos.slice(0,3).forEach((item,i)=>{
+  const a=document.createElement('a');a.className='preview-card';a.href='memories.html#photos';a.innerHTML=`<img src="media/photos/${item.file}" alt="${item.caption}"><span>${item.caption}</span>`;preview.appendChild(a);
+});
+
+let currentSong=0;const audio=$('#audio');
+function loadSong(i, animate=true){currentSong=(i+D.songs.length)%D.songs.length;const s=D.songs[currentSong];const shell=document.querySelector('.song-shell');if(animate){shell.classList.remove('song-switching');void shell.offsetWidth;shell.classList.add('song-switching');setTimeout(()=>shell.classList.remove('song-switching'),650);}$('#songTitle').textContent=s.title;$('#songCover').src=s.cover;$('#songIndex').textContent=pad(currentSong+1)+' / '+pad(D.songs.length);$('#songIndexText').textContent=pad(currentSong+1);audio.src='audio/song-'+pad(currentSong+1)+'.mp3';audio.load();$('#songPlay').textContent='▶';}
+loadSong(0, false);
+$('#songPlay').onclick=()=>audio.paused?audio.play().catch(()=>{}):audio.pause();
+audio.onplay=()=>$('#songPlay').textContent='Ⅱ'; audio.onpause=()=>$('#songPlay').textContent='▶';
+$('#prevSong').onclick=()=>loadSong(currentSong-1);$('#nextSong').onclick=()=>loadSong(currentSong+1);$('#toggleSong').onclick=()=>loadSong(currentSong+1);
+
+const welcome=$('#welcome');
+const celebration=$('#birthdayCelebration');
+function closeWelcome(){
+  welcome.classList.add('is-hidden');
+  document.body.classList.remove('modal-open');
+  startBirthdayCelebration();
+}
+$('#enterBtn').onclick=closeWelcome;$('#welcomeClose').onclick=closeWelcome;
+
+function startBirthdayCelebration(){
+  if(sessionStorage.getItem('birthday_celebration_shown')==='1') return;
+  sessionStorage.setItem('birthday_celebration_shown','1');
+  const balloons=$('#balloonsLayer'), confetti=$('#confettiLayer'), fireworks=$('#fireworksLayer');
+  const colors=['pink','gold','wine','lilac','rose'];
+  for(let i=0;i<13;i++){
+    const b=document.createElement('div'); b.className='birthday-balloon '+colors[i%colors.length];
+    b.textContent='بحبك';
+    b.style.left=(3+i*7.7+Math.random()*5)+'%';
+    b.style.setProperty('--duration',(10+Math.random()*7)+'s');
+    b.style.setProperty('--delay',(-Math.random()*8)+'s');
+    b.style.setProperty('--drift',(Math.random()*110-55)+'px');
+    balloons.appendChild(b);
+  }
+  for(let i=0;i<48;i++){
+    const c=document.createElement('i'); c.className='confetti';
+    c.style.left=(Math.random()*100)+'%';
+    c.style.background=['#f08aa5','#d6a746','#9b4d70','#b98ad6','#ef6b87','#f6cf78'][i%6];
+    c.style.setProperty('--duration',(4+Math.random()*5)+'s');
+    c.style.setProperty('--delay',(-Math.random()*6)+'s');
+    c.style.setProperty('--drift',(Math.random()*180-90)+'px');
+    confetti.appendChild(c);
+  }
+  [18,50,78].forEach((left,i)=>{
+    const r=document.createElement('div'); r.className='rocket'; r.style.left=left+'%'; r.style.setProperty('--delay',(i*.45)+'s'); fireworks.appendChild(r);
+    setTimeout(()=>{for(let j=0;j<3;j++){const f=document.createElement('div');f.className='firework';f.style.left=(left+(j-1)*2)+'%';f.style.bottom=(38+i*8+j*3)+'%';f.style.setProperty('--delay',(j*.18)+'s');fireworks.appendChild(f)}},1100+i*350);
+  });
+  celebration.classList.add('show');
+  celebration.setAttribute('aria-hidden','false');
+  setTimeout(()=>{
+    celebration.classList.remove('show');
+    celebration.setAttribute('aria-hidden','true');
+    setTimeout(()=>celebration.remove(),500);
+  },10000);
+}
+
+</script>
+</body></html>
